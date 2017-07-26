@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<!-- If IE use the latest rendering engine -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- Set the page to the width of the device and set the zoon level -->
+    <meta name="viewport" content="width = device-width, initial-scale = 1">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <title>Item List</title>
+    <style type="text/css">
+         body
+         {
+             background-color:#cce6ff;
+         }
+        .jumbotron
+        {
+            background-color:#0099ff;
+            color:black;
+        }
+        td
+        {
+            text-align: center;
+            border: 1pt solid black;
+        }
+        table
+        {
+            border-collapse:collapse;
+        }
+        th,td
+        {
+            border: 1pt solid black;
+        }
+    </style>
+</head>
+<body>
+   <br/>
+   <br/>
+   <div  class="jumbotron" >
+       <div align="left">
+           <h1>Shop Management</h1>
+       </div>
+       <div align="right">
+           <button type="button" class="btn btn-default btn-lg">
+               <a href="{% url 'item-create' %}">Add New Item</a>
+           </button>
+       </div>
+   </div>
+   <br/>
+    <table class="table table-bordered table-striped table-hover" width="100%">
+        <thead>
+            <tr>
+                <td colspan="4" class="text-center"><h1>Details Of Items</h1></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="text-center">Product Name</th>
+                <th class="text-center">type</th>
+                <th  class="text-center" >orginal price</th>
+                <th  class="text-center" >rating</th>
+                <th  class="text-center" >Actions</th>
+            </tr>
+            {% for lst in object_list %}
+            <tr>
+                <td>{{ lst.product_name }} </td>
+                <td>{{ lst.product_type }}</td>
+                <td>{{ lst.price_per_piece }}</td>
+                <td>{{ lst.rating }}</td>
+                <td>
+                    <div class="btn-group btn-group-lg" role="group" align=center>
+                        <button type="button" class="btn btn-default">
+                            <a href="{% url 'item-details' lst.id %}">Details</a>
+                        </button>
+                        <button type="button" class="btn btn-default">
+                            <a href="{% url 'item-update' lst.id %}">Updates</a>
+                        </button>
+                        <button type="button" class="btn btn-default">
+                            <a href="{% url 'item-delete' lst.id %}">Delete</a>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<!-- Use downloaded version of Bootstrap -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
